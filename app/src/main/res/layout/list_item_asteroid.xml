@@ -4,14 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="asteroid"
             type="de.myprojects.my_asteroid_radar.domain.Asteroid" />
+
+        <variable
+            name="clickListener"
+            type="de.myprojects.my_asteroid_radar.main.AsteroidListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(asteroid)}"
         android:background="#000000">
 
         <TextView
@@ -20,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:textColor="#FFFFFF"
             android:text="@string/asteroid_code_name_placeholder"
+            android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/list_item_date"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,8 +41,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="273dp"
             android:layout_marginBottom="16dp"
-            android:textColor="#BEFFFFFF"
             android:text="@string/asteroid_date_placeholder"
+            android:textColor="#BEFFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/list_item_potential_hazardous"
             app:layout_constraintHorizontal_bias="0.0"
@@ -48,10 +54,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/icon_harzadous_potential"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_status_potentially_hazardous"
-            android:contentDescription="@string/icon_harzadous_potential" />
+            app:srcCompat="@drawable/ic_status_potentially_hazardous" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

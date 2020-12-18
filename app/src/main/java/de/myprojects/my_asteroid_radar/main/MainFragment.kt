@@ -3,9 +3,11 @@ package de.myprojects.my_asteroid_radar.main
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import de.myprojects.my_asteroid_radar.R
 import de.myprojects.my_asteroid_radar.databinding.FragmentMainBinding
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+    private lateinit var asteroidAdapter: AsteroidAdapter
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
@@ -24,8 +27,10 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        setBinding(inflater)
         setHasOptionsMenu(true)
+        setBinding(inflater)
+        initRecyclerView()
+        observeAsteroid()
         setImageOfDay()
 
         return binding.root
@@ -44,6 +49,25 @@ class MainFragment : Fragment() {
             Picasso.with(this.activity)
                 .load(image.url)
                 .into(activity_main_image_of_the_day)
+        })
+    }
+
+    private fun initRecyclerView() {
+        asteroidAdapter = AsteroidAdapter(AsteroidListener { asteroidId ->
+            Toast.makeText(this.context, "$asteroidId", Toast.LENGTH_SHORT).show()
+        })
+
+        binding.asteroidRecycler.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = asteroidAdapter
+        }
+    }
+
+    private fun observeAsteroid(){
+        viewModel.test.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                asteroidAdapter.submitList(it)
+            }
         })
     }
 

@@ -3,6 +3,7 @@ package de.myprojects.my_asteroid_radar.main
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import de.myprojects.my_asteroid_radar.domain.Asteroid
 import de.myprojects.my_asteroid_radar.utils.Constants
 import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.network.NasaApi
@@ -19,12 +20,20 @@ class MainViewModel : ViewModel() {
 
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
 
-        init {
-            getAsteroids()
-            getImageOfDay()
+    val test: LiveData<List<Asteroid>>
+        get() = _test
 
-            getNextSevenDays()
-        }
+    private val _test = MutableLiveData<List<Asteroid>>()
+
+    init {
+
+        _test.value = listOf(Asteroid())
+
+        getAsteroids()
+        getImageOfDay()
+
+        getNextSevenDays()
+    }
 
     private fun getAsteroids() {
         viewModelScope.launch {
