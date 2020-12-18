@@ -19,7 +19,6 @@ class MainViewModel : ViewModel() {
 
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
 
-
         init {
             getAsteroids()
             getImageOfDay()
@@ -35,8 +34,6 @@ class MainViewModel : ViewModel() {
                     getNextSevenDays(),
                     "DEMO_KEY"
                 )
-
-                Log.i("TEST", parseAsteroidsJsonResult(JSONObject(response)).toString())
 
             } catch (e: Exception) {
                 Log.i("TEST", e.toString())

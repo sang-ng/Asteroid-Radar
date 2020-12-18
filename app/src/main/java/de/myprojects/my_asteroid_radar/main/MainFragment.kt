@@ -1,6 +1,7 @@
 package de.myprojects.my_asteroid_radar.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,22 +23,27 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(inflater)
-        binding.lifecycleOwner = this
 
-        binding.viewModel = viewModel
-
+        setBinding(inflater)
         setHasOptionsMenu(true)
         setImageOfDay()
 
         return binding.root
     }
 
-    private fun setImageOfDay(){
-        viewModel.imageOfDay.observe(viewLifecycleOwner, Observer { image ->
-                Picasso.with(this.activity)
-                    .load(image.url)
-                    .into(activity_main_image_of_the_day)
+    private fun setBinding(inflater: LayoutInflater){
+        binding = FragmentMainBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
+    }
+
+    private fun setImageOfDay() {
+        viewModel.imageOfDay.observe(viewLifecycleOwner, { image ->
+
+            Picasso.with(this.activity)
+                .load(image.url)
+                .into(activity_main_image_of_the_day)
         })
     }
 
