@@ -2,32 +2,29 @@ package de.myprojects.my_asteroid_radar.main
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import de.myprojects.my_asteroid_radar.database.getDatabase
 import de.myprojects.my_asteroid_radar.domain.Asteroid
-import de.myprojects.my_asteroid_radar.utils.Constants
 import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.network.NasaApi
-import de.myprojects.my_asteroid_radar.network.parseAsteroidsJsonResult
+import de.myprojects.my_asteroid_radar.utils.Constants
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : ViewModel() {
+
+    private val database = getDatabase(application)
 
     val imageOfDay: LiveData<PictureOfDay>
         get() = _imageOfDay
 
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
 
-    val test: LiveData<List<Asteroid>>
-        get() = _test
-
-    private val _test = MutableLiveData<List<Asteroid>>()
-
     init {
-
-        _test.value = listOf(Asteroid())
 
         getAsteroids()
         getImageOfDay()

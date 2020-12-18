@@ -19,7 +19,13 @@ class MainFragment : Fragment() {
     private lateinit var asteroidAdapter: AsteroidAdapter
 
     private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onViewCreated()"
+        }
+        //The ViewModelProviders (plural) is deprecated.
+        //ViewModelProviders.of(this, DevByteViewModel.Factory(activity.application)).get(DevByteViewModel::class.java)
+        ViewModelProvider(this, MainViewModelFactory(activity.application)).get(MainViewModel::class.java)
+
     }
 
     override fun onCreateView(
@@ -64,7 +70,7 @@ class MainFragment : Fragment() {
     }
 
     private fun observeAsteroid(){
-        viewModel.test.observe(viewLifecycleOwner, Observer {
+        viewModel.test.observe(viewLifecycleOwner,  {
             it?.let {
                 asteroidAdapter.submitList(it)
             }
