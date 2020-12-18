@@ -7,9 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.myprojects.my_asteroid_radar.database.getDatabase
-import de.myprojects.my_asteroid_radar.domain.Asteroid
 import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.network.NasaApi
+import de.myprojects.my_asteroid_radar.repository.AsteroidsRepository
 import de.myprojects.my_asteroid_radar.utils.Constants
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -18,6 +18,9 @@ import java.util.*
 class MainViewModel(application: Application) : ViewModel() {
 
     private val database = getDatabase(application)
+    private val repository = AsteroidsRepository(database)
+
+    val asteroids = repository.asteroids
 
     val imageOfDay: LiveData<PictureOfDay>
         get() = _imageOfDay
@@ -25,27 +28,18 @@ class MainViewModel(application: Application) : ViewModel() {
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
 
     init {
-
         getAsteroids()
         getImageOfDay()
 
-        getNextSevenDays()
+//        getNextSevenDays()
     }
 
     private fun getAsteroids() {
         viewModelScope.launch {
-            try {
-                val response = NasaApi.retrofitService.getAsteroids(
-                    getDateToday(),
-                    getNextSevenDays(),
-                    "DEMO_KEY"
-                )
-
-            } catch (e: Exception) {
-                Log.i("TEST", e.toString())
-            }
+            repository.refreshAsteroids()
         }
     }
+
 
     private fun getDateToday(): String {
         val currentTime = Calendar.getInstance().time

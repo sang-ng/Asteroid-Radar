@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import de.myprojects.my_asteroid_radar.R
 import de.myprojects.my_asteroid_radar.databinding.ListItemAsteroidBinding
 import de.myprojects.my_asteroid_radar.domain.Asteroid
 
@@ -24,6 +25,14 @@ class AsteroidAdapter(private val clickListener: AsteroidListener) :
         fun bind(clickListener: AsteroidListener, item: Asteroid) {
             binding.asteroid = item
             binding.clickListener = clickListener
+
+            binding.listItemPotentialHazardous.setImageResource(
+                when (item.isPotentiallyHazardous) {
+                    true -> R.drawable.ic_status_potentially_hazardous
+                    false -> R.drawable.ic_status_normal
+                }
+            )
+
             binding.executePendingBindings()
         }
 

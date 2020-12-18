@@ -70,7 +70,8 @@ class MainFragment : Fragment() {
     }
 
     private fun observeAsteroid(){
-        viewModel.test.observe(viewLifecycleOwner,  {
+        viewModel.asteroids.observe(viewLifecycleOwner,  {
+
             it?.let {
                 asteroidAdapter.submitList(it)
             }
