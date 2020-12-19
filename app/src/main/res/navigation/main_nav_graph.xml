@@ -8,6 +8,22 @@
         android:id="@+id/mainFragment"
         android:name="de.myprojects.my_asteroid_radar.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="de.myprojects.my_asteroid_radar.detail.DetailFragment"
+        android:label="DetailFragment">
+
+        <argument
+            android:name="selectedAsteroid"
+            app:argType="de.myprojects.my_asteroid_radar.domain.Asteroid" />
+        <action
+            android:id="@+id/action_detailFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 
 </navigation>

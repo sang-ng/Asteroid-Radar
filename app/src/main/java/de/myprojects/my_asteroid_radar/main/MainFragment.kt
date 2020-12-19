@@ -1,16 +1,15 @@
 package de.myprojects.my_asteroid_radar.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import de.myprojects.my_asteroid_radar.R
 import de.myprojects.my_asteroid_radar.databinding.FragmentMainBinding
+import de.myprojects.my_asteroid_radar.detail.DetailFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -22,10 +21,10 @@ class MainFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onViewCreated()"
         }
-        //The ViewModelProviders (plural) is deprecated.
-        //ViewModelProviders.of(this, DevByteViewModel.Factory(activity.application)).get(DevByteViewModel::class.java)
-        ViewModelProvider(this, MainViewModelFactory(activity.application)).get(MainViewModel::class.java)
-
+        ViewModelProvider(
+            this,
+            MainViewModelFactory(activity.application)
+        ).get(MainViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -38,11 +37,24 @@ class MainFragment : Fragment() {
         initRecyclerView()
         observeAsteroid()
         setImageOfDay()
+        observeNavigation()
 
         return binding.root
     }
 
-    private fun setBinding(inflater: LayoutInflater){
+    private fun observeNavigation() {
+        viewModel.navigateToDetail.observe(viewLifecycleOwner) { itemClicked ->
+            itemClicked?.let {
+                this.findNavController().navigate(
+                    MainFragmentDirections
+                        .actionMainFragmentToDetailFragment(it)
+                )
+                viewModel.onDetailNavigated()
+            }
+        }
+    }
+
+    private fun setBinding(inflater: LayoutInflater) {
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
@@ -59,8 +71,8 @@ class MainFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        asteroidAdapter = AsteroidAdapter(AsteroidListener { asteroidId ->
-            Toast.makeText(this.context, "$asteroidId", Toast.LENGTH_SHORT).show()
+        asteroidAdapter = AsteroidAdapter(AsteroidListener { asteroid ->
+            viewModel.onListItemClicked(asteroid)
         })
 
         binding.asteroidRecycler.apply {
@@ -69,8 +81,8 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun observeAsteroid(){
-        viewModel.asteroids.observe(viewLifecycleOwner,  {
+    private fun observeAsteroid() {
+        viewModel.asteroids.observe(viewLifecycleOwner, {
 
             it?.let {
                 asteroidAdapter.submitList(it)

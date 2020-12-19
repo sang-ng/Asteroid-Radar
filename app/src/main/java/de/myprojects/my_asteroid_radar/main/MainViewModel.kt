@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.myprojects.my_asteroid_radar.database.getDatabase
+import de.myprojects.my_asteroid_radar.domain.Asteroid
 import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.network.NasaApi
 import de.myprojects.my_asteroid_radar.repository.AsteroidsRepository
@@ -22,13 +23,15 @@ class MainViewModel(application: Application) : ViewModel() {
     val imageOfDay: LiveData<PictureOfDay>
         get() = _imageOfDay
 
+    val navigateToDetail: LiveData<Asteroid>
+        get() = _navigateToDetail
+
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
+    private val _navigateToDetail = MutableLiveData<Asteroid>()
 
     init {
         getAsteroids()
         getImageOfDay()
-
-//        getNextSevenDays()
     }
 
     private fun getAsteroids() {
@@ -36,9 +39,6 @@ class MainViewModel(application: Application) : ViewModel() {
             repository.refreshAsteroids()
         }
     }
-
-
-
 
     private fun getImageOfDay() {
         viewModelScope.launch {
@@ -50,5 +50,13 @@ class MainViewModel(application: Application) : ViewModel() {
                 Log.i("TEST", e.toString())
             }
         }
+    }
+
+    fun onListItemClicked(asteroid: Asteroid) {
+        _navigateToDetail.value = asteroid
+    }
+
+    fun onDetailNavigated(){
+        _navigateToDetail.value = null
     }
 }
