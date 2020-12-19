@@ -25,3 +25,17 @@ Fapp/src/main/java/de/myprojects/my_asteroid_radar/main/MainFragment.kt,1\2\12f
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+~
+Napp/src/main/java/de/myprojects/my_asteroid_radar/database/DatabaseAsteroid.kt,c\d\cdd19632cfdd48713713cce8b0f6f4c58c02328d
+~
+Napp/src/main/java/de/myprojects/my_asteroid_radar/main/MainViewModelFactory.kt,d\b\dbdc3ce18729b1fac03387a659a6414fe08825f1
+y
+Iapp/src/main/java/de/myprojects/my_asteroid_radar/main/AsteroidAdapter.kt,9\8\988799bcd1583e98903d3b49328b0bfcd2cf3ca6
+y
+Iapp/src/main/java/de/myprojects/my_asteroid_radar/database/AsteroidDao.kt,d\4\d4097dba7af02bb1a73ee9e720dfb0580f51c111
+z
+Japp/src/main/java/de/myprojects/my_asteroid_radar/database/AsteroidRoom.kt,c\f\cf4101faee67e74f53265e3eeba8851949a7fe30
+u
+Eapp/src/main/java/de/myprojects/my_asteroid_radar/utils/TimeHelper.kt,d\1\d16328cd4598d267e9eb638c93def37ad0eb890f
+ƒ
+Sapp/src/main/java/de/myprojects/my_asteroid_radar/repository/AsteroidsRepository.kt,3\4\3483ef51381417847a115b4115d4d196bb284ef6

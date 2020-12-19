@@ -10,10 +10,7 @@ import de.myprojects.my_asteroid_radar.database.getDatabase
 import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.network.NasaApi
 import de.myprojects.my_asteroid_radar.repository.AsteroidsRepository
-import de.myprojects.my_asteroid_radar.utils.Constants
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MainViewModel(application: Application) : ViewModel() {
 
@@ -41,22 +38,7 @@ class MainViewModel(application: Application) : ViewModel() {
     }
 
 
-    private fun getDateToday(): String {
-        val currentTime = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
 
-        return dateFormat.format(currentTime)
-    }
-
-    private fun getNextSevenDays(): String {
-        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
-        val calendar = Calendar.getInstance()
-        calendar.time
-
-        calendar.add(Calendar.DATE, 7)
-
-        return dateFormat.format(calendar.time)
-    }
 
     private fun getImageOfDay() {
         viewModelScope.launch {
