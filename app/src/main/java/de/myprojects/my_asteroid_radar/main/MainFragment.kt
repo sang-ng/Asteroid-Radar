@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso
 import de.myprojects.my_asteroid_radar.R
 import de.myprojects.my_asteroid_radar.databinding.FragmentMainBinding
 import de.myprojects.my_asteroid_radar.detail.DetailFragment
+import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.utils.bindTextViewToAstronomicalUnit
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -57,11 +58,16 @@ class MainFragment : Fragment() {
 
     private fun setImageOfDay() {
         viewModel.imageOfDay.observe(viewLifecycleOwner, { image ->
-
             Picasso.with(this.activity)
                 .load(image.url)
                 .into(activity_main_image_of_the_day)
+
+            setContentDescription(image)
         })
+    }
+
+    private fun setContentDescription(image: PictureOfDay) {
+        activity_main_image_of_the_day.contentDescription = image.title
     }
 
     private fun initRecyclerView() {

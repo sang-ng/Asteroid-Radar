@@ -39,3 +39,7 @@ u
 Eapp/src/main/java/de/myprojects/my_asteroid_radar/utils/TimeHelper.kt,d\1\d16328cd4598d267e9eb638c93def37ad0eb890f
 ƒ
 Sapp/src/main/java/de/myprojects/my_asteroid_radar/repository/AsteroidsRepository.kt,3\4\3483ef51381417847a115b4115d4d196bb284ef6
+z
+Japp/src/main/java/de/myprojects/my_asteroid_radar/detail/DetailFragment.kt,f\8\f8cca2d54b63f325f5d2fb9982dac88786799643
+{
+Kapp/src/main/java/de/myprojects/my_asteroid_radar/work/RefreshDataWorker.kt,3\4\343b0c0956e8f2e6790f44106fc5036d27bc046d
