@@ -2,14 +2,18 @@ package de.myprojects.my_asteroid_radar.main
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import de.myprojects.my_asteroid_radar.R
 import de.myprojects.my_asteroid_radar.databinding.FragmentMainBinding
 import de.myprojects.my_asteroid_radar.detail.DetailFragment
+import de.myprojects.my_asteroid_radar.utils.bindTextViewToAstronomicalUnit
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -34,25 +38,15 @@ class MainFragment : Fragment() {
 
         setHasOptionsMenu(true)
         setBinding(inflater)
+        setImageOfDay()
         initRecyclerView()
         observeAsteroid()
-        setImageOfDay()
+        observeConnection()
         observeNavigation()
 
         return binding.root
     }
 
-    private fun observeNavigation() {
-        viewModel.navigateToDetail.observe(viewLifecycleOwner) { itemClicked ->
-            itemClicked?.let {
-                this.findNavController().navigate(
-                    MainFragmentDirections
-                        .actionMainFragmentToDetailFragment(it)
-                )
-                viewModel.onDetailNavigated()
-            }
-        }
-    }
 
     private fun setBinding(inflater: LayoutInflater) {
         binding = FragmentMainBinding.inflate(inflater)
@@ -90,6 +84,26 @@ class MainFragment : Fragment() {
         })
     }
 
+    private fun observeConnection() {
+        viewModel.connectionError.observe(viewLifecycleOwner, {
+            if (it) {
+                Toast.makeText(requireContext(), "No connection", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun observeNavigation() {
+        viewModel.navigateToDetail.observe(viewLifecycleOwner) { itemClicked ->
+
+            itemClicked?.let {
+                this.findNavController().navigate(
+                    MainFragmentDirections
+                        .actionMainFragmentToDetailFragment(it)
+                )
+                viewModel.onDetailNavigated()
+            }
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_overflow_menu, menu)

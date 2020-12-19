@@ -25,4 +25,5 @@
     <string name="asteroid_code_name_placeholder">2903874</string>
     <string name="asteroid_date_placeholder">2020-05-04</string>
     <string name="icon_harzadous_potential">Icon harzadous potential</string>
+    <string name="picture_of_the_day_of_nasa">Picture of the day of Nasa</string>
 </resources>

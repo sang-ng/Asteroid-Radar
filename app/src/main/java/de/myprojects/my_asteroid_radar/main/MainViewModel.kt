@@ -26,17 +26,33 @@ class MainViewModel(application: Application) : ViewModel() {
     val navigateToDetail: LiveData<Asteroid>
         get() = _navigateToDetail
 
+    val connectionError: LiveData<Boolean>
+        get() = _connectionError
+
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
     private val _navigateToDetail = MutableLiveData<Asteroid>()
+    private val _connectionError = MutableLiveData<Boolean>()
 
     init {
         getAsteroids()
         getImageOfDay()
     }
 
+    private fun deleteAll() {
+        viewModelScope.launch {
+            repository.deleteAll()
+        }
+    }
+
     private fun getAsteroids() {
         viewModelScope.launch {
-            repository.refreshAsteroids()
+            try {
+                repository.refreshAsteroids()
+                _connectionError.value = false
+            } catch (e: Exception) {
+                Log.i("TEST", e.toString())
+                _connectionError.value = true
+            }
         }
     }
 
@@ -56,7 +72,7 @@ class MainViewModel(application: Application) : ViewModel() {
         _navigateToDetail.value = asteroid
     }
 
-    fun onDetailNavigated(){
+    fun onDetailNavigated() {
         _navigateToDetail.value = null
     }
 }
