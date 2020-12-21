@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="de.myprojects.my_asteroid_radar.main.MainFragment"
-        android:label="fragment_main"
+        android:label="@string/fragment_main"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"

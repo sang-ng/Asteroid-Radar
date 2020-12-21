@@ -1,5 +1,6 @@
 package de.myprojects.my_asteroid_radar.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import de.myprojects.my_asteroid_radar.database.AsteroidRoom
@@ -7,6 +8,7 @@ import de.myprojects.my_asteroid_radar.database.asDomainModel
 import de.myprojects.my_asteroid_radar.domain.Asteroid
 import de.myprojects.my_asteroid_radar.network.NasaApi
 import de.myprojects.my_asteroid_radar.network.parseAsteroidsJsonResult
+import de.myprojects.my_asteroid_radar.utils.Constants
 import de.myprojects.my_asteroid_radar.utils.TimeHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,7 +24,11 @@ class AsteroidsRepository(private val database: AsteroidRoom) {
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             val asteroids =
-                NasaApi.retrofitService.getAsteroids(TimeHelper.getDateToday(), TimeHelper.getNextSevenDays(), "DEMO_KEY")
+                NasaApi.retrofitService.getAsteroids(
+                    TimeHelper.getDateToday(),
+                    TimeHelper.getNextSevenDays(),
+                    Constants.API_KEY
+                )
 
             val jsonResult = parseAsteroidsJsonResult(JSONObject(asteroids))
 
@@ -30,8 +36,8 @@ class AsteroidsRepository(private val database: AsteroidRoom) {
         }
     }
 
-    suspend fun deleteAll(){
-        withContext(Dispatchers.IO){
+    suspend fun deleteAll() {
+        withContext(Dispatchers.IO) {
             database.asteroidDao.deleteAll()
         }
     }

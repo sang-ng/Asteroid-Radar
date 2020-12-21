@@ -10,7 +10,6 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 data class NetworkAsteroidContainer(val asteroids: List<NetworkAsteroid>)
 
-
 @Parcelize
 data class NetworkAsteroid(
     @Json(name = "id")

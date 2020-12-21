@@ -20,11 +20,12 @@
     <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">This is NASA\'s picture of day, showing nothing yet</string>
     <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
     <string name="_6835415">6835415</string>
-    <string name="_2020_02_08">2020-02-08</string>
+    <string name="_2020_02_08">2020–02–08</string>
     <string name="icon_for_harzadous_potential">Icon for harzadous potential</string>
     <string name="asteroid_code_name_placeholder">2903874</string>
-    <string name="asteroid_date_placeholder">2020-05-04</string>
+    <string name="asteroid_date_placeholder">2020–05–04</string>
     <string name="icon_harzadous_potential">Icon harzadous potential</string>
     <string name="picture_of_the_day_of_nasa">Picture of the day of Nasa</string>
     <string name="help_button">help button</string>
+    <string name="fragment_main">fragment_main</string>
 </resources>

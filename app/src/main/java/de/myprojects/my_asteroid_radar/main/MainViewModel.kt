@@ -15,6 +15,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : ViewModel() {
 
+    enum class Connection { SUCCESS, ERROR }
+
     private val database = getDatabase(application)
     private val repository = AsteroidsRepository(database)
 
@@ -26,12 +28,12 @@ class MainViewModel(application: Application) : ViewModel() {
     val navigateToDetail: LiveData<Asteroid>
         get() = _navigateToDetail
 
-    val connectionError: LiveData<Boolean>
+    val connectionError: LiveData<Connection>
         get() = _connectionError
 
     private val _imageOfDay = MutableLiveData<PictureOfDay>()
     private val _navigateToDetail = MutableLiveData<Asteroid>()
-    private val _connectionError = MutableLiveData<Boolean>()
+    private val _connectionError = MutableLiveData<Connection>()
 
     init {
         getAsteroids()
@@ -48,11 +50,13 @@ class MainViewModel(application: Application) : ViewModel() {
         viewModelScope.launch {
             try {
                 repository.refreshAsteroids()
-                _connectionError.value = false
+
+                _connectionError.value = Connection.SUCCESS
             } catch (e: Exception) {
                 Log.i("TEST", e.toString())
-                _connectionError.value = true
+                _connectionError.value = Connection.ERROR
             }
+            Log.i("TEST", "vm" + _connectionError.value.toString())
         }
     }
 
@@ -63,7 +67,7 @@ class MainViewModel(application: Application) : ViewModel() {
                 _imageOfDay.value = response
 
             } catch (e: Exception) {
-                Log.i("TEST", e.toString())
+                Log.i("TEST", "getImageOfDay: $e")
             }
         }
     }

@@ -1,6 +1,7 @@
 package de.myprojects.my_asteroid_radar.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -91,9 +92,9 @@ class MainFragment : Fragment() {
     }
 
     private fun observeConnection() {
-        viewModel.connectionError.observe(viewLifecycleOwner, {
-            if (it) {
-                Toast.makeText(requireContext(), "No connection", Toast.LENGTH_SHORT).show()
+        viewModel.connectionError.observe(viewLifecycleOwner, { connectionError ->
+            if (connectionError == MainViewModel.Connection.ERROR) {
+                Toast.makeText(requireActivity(), "No connection", Toast.LENGTH_SHORT).show()
             }
         })
     }

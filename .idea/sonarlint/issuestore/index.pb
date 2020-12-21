@@ -43,3 +43,5 @@ z
 Japp/src/main/java/de/myprojects/my_asteroid_radar/detail/DetailFragment.kt,f\8\f8cca2d54b63f325f5d2fb9982dac88786799643
 {
 Kapp/src/main/java/de/myprojects/my_asteroid_radar/work/RefreshDataWorker.kt,3\4\343b0c0956e8f2e6790f44106fc5036d27bc046d
+@
+local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca

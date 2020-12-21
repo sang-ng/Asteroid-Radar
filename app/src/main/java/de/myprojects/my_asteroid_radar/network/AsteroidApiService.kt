@@ -2,6 +2,7 @@ package de.myprojects.my_asteroid_radar.network
 
 import de.myprojects.my_asteroid_radar.domain.PictureOfDay
 import de.myprojects.my_asteroid_radar.utils.Constants.BASE_URL
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
