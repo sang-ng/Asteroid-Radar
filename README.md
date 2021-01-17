@@ -10,10 +10,10 @@ The app consists of two screens: A Main screen with a list of all the detected a
 
 ### Screenshots
 
-![Screenshot 1](My-Asteroid-Radar/screenshots/screen_1.png)
-![Screenshot 2](My-Asteroid-Radar/screenshots/screen_2.png)
-![Screenshot 3](My-Asteroid-Radar/screenshots/screen_3.png)
-![Screenshot 4](My-Asteroid-Radar/screenshots/screen_4.png)
+![Screenshot 1](screenshots/screen_1.png)
+![Screenshot 2](screenshots/screen_2.png)
+![Screenshot 3](screenshots/screen_3.png)
+![Screenshot 4](screenshots/screen_4.png)
 
 ### Dependencies
 
