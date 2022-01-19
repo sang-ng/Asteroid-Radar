@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by lazy {
         val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onViewCreated()"
+            getString(R.string.you_can_only_access_viewmodel)
         }
         ViewModelProvider(
             this,
@@ -94,7 +94,7 @@ class MainFragment : Fragment() {
     private fun observeConnection() {
         viewModel.connectionError.observe(viewLifecycleOwner, { connectionError ->
             if (connectionError == MainViewModel.Connection.ERROR) {
-                Toast.makeText(requireActivity(), "No connection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), getString(R.string.no_connection), Toast.LENGTH_SHORT).show()
             }
         })
     }

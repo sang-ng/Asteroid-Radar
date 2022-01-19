@@ -47,10 +47,8 @@ class MainViewModel(application: Application) : ViewModel() {
 
                 _connectionError.value = Connection.SUCCESS
             } catch (e: Exception) {
-                Log.i("TEST", e.toString())
                 _connectionError.value = Connection.ERROR
             }
-            Log.i("TEST", "vm" + _connectionError.value.toString())
         }
     }
 
@@ -61,7 +59,7 @@ class MainViewModel(application: Application) : ViewModel() {
                 _imageOfDay.value = response
 
             } catch (e: Exception) {
-                Log.i("TEST", "getImageOfDay: $e")
+                e.stackTrace
             }
         }
     }

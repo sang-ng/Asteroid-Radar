@@ -28,4 +28,6 @@
     <string name="picture_of_the_day_of_nasa">Picture of the day of Nasa</string>
     <string name="help_button">help button</string>
     <string name="fragment_main">fragment_main</string>
+    <string name="you_can_only_access_viewmodel">You can only access the viewModel after onViewCreated()</string>
+    <string name="no_connection">No connection</string>
 </resources>
