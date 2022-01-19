@@ -1,6 +1,5 @@
 package de.myprojects.my_asteroid_radar.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import de.myprojects.my_asteroid_radar.database.AsteroidRoom
@@ -33,12 +32,6 @@ class AsteroidsRepository(private val database: AsteroidRoom) {
             val jsonResult = parseAsteroidsJsonResult(JSONObject(asteroids))
 
             database.asteroidDao.insertAll(jsonResult)
-        }
-    }
-
-    suspend fun deleteAll() {
-        withContext(Dispatchers.IO) {
-            database.asteroidDao.deleteAll()
         }
     }
 }

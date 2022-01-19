@@ -40,12 +40,6 @@ class MainViewModel(application: Application) : ViewModel() {
         getImageOfDay()
     }
 
-    private fun deleteAll() {
-        viewModelScope.launch {
-            repository.deleteAll()
-        }
-    }
-
     private fun getAsteroids() {
         viewModelScope.launch {
             try {
